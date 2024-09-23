@@ -1,3 +1,25 @@
 spring:
   application:
     name: status-app
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+application:
+  ms1:
+    id: 1
+    status: ACTIVE
+  ms2:
+    id: 2
+    status: INACTIVE
+  ms3:
+    id: 3
+    status: ACTIVE
+
+server:
+  port: 9090

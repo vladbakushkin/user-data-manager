@@ -17,6 +17,7 @@
         <module>status-app</module>
         <module>user-data-service</module>
         <module>user-manager-app</module>
+        <module>dto</module>
     </modules>
 
     <properties>
