@@ -13,10 +13,13 @@ import java.time.LocalDateTime;
 @Schema(description = "Краткая информация о пользователя")
 public class UserShortResponseDto {
 
+    @Schema(description = "Уникальный идентификатор пользователя", example = "1")
     private Long id;
 
+    @Schema(description = "Адрес электронной почты пользователя", example = "example@gmail.com")
     private String email;
 
+    @Schema(description = "Дата и время создания пользователя", example = "2024-09-25T19:51:46")
     private LocalDateTime createdAt;
 
 }

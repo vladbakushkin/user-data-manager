@@ -1,5 +1,6 @@
 package ru.bakushkin.userdataservice.message.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +20,16 @@ public class MessageController {
 
     private final MessageService messageService;
 
+    @Operation(summary = "Получение сообщений пользователя",
+            description = "Возвращает список сообщений, отправленных пользователем с указанным ID.")
     @GetMapping("/{userId}")
     public List<MessageResponseDto> getMessagesFromUser(@PathVariable Long userId) {
         log.info("Getting all messages from user: {}", userId);
         return messageService.getMessagesFromUser(userId);
     }
 
+    @Operation(summary = "Удаление сообщения по ID",
+            description = "Удаляет сообщение с указанным ID.")
     @DeleteMapping("/{messageId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMessage(@PathVariable Long messageId) {

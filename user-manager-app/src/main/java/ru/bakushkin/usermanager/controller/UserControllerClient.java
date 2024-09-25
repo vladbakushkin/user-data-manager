@@ -19,33 +19,38 @@ public class UserControllerClient {
 
     private final UserServiceClient userServiceClient;
 
-    @Operation(summary = "Получение списка пользователей зарегистрированных в системе")
+    @Operation(summary = "Получение списка пользователей",
+            description = "Возвращает список пользователей с поддержкой пагинации.")
     @GetMapping("/users")
     public List<UserResponseDto> getAllUsers(@RequestParam(defaultValue = "0") Integer from,
                                              @RequestParam(defaultValue = "10") Integer size) {
         return userServiceClient.getAllUsers(from, size);
     }
 
-    @Operation(summary = "Получение списка активных пользователей в системе")
+    @Operation(summary = "Получение списка активных пользователей",
+            description = "Возвращает список всех активных пользователей системы.")
     @GetMapping("/users/active")
     public List<UserResponseDto> getActiveUsers() {
         return userServiceClient.getActiveUsers();
     }
 
-    @Operation(summary = "Получение информации о сообщениях полученных от конкретного пользователя")
+    @Operation(summary = "Получение сообщений пользователя",
+            description = "Возвращает список сообщений, отправленных пользователем с указанным ID.")
     @GetMapping("/messages/{userId}")
     public List<MessageResponseDto> getMessagesFromUser(@PathVariable Long userId) {
         return userServiceClient.getMessagesFromUser(userId);
     }
 
-    @Operation(summary = "Удаление пользователя из системы по id")
+    @Operation(summary = "Удаление пользователя по ID",
+            description = "Удаляет пользователя с указанным ID.")
     @DeleteMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Long userId) {
         userServiceClient.deleteUser(userId);
     }
 
-    @Operation(summary = "Удаление сообщения из системы по id")
+    @Operation(summary = "Удаление сообщения по ID",
+            description = "Удаляет сообщение с указанным ID.")
     @DeleteMapping("/messages/{messageId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMessage(@PathVariable Long messageId) {

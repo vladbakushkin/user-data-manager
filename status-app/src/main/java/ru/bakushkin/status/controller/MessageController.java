@@ -1,6 +1,7 @@
 package ru.bakushkin.status.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class MessageController {
 
     private final MessageService messageService;
 
+    @Operation(summary = "Отправка сообщения в шину RabbitMQ",
+            description = "Отправляет сообщение от пользователя с произвольной текстовой информацией в шину RabbitMQ.")
     @PostMapping
     public ResponseEntity<String> sendMessage(@Valid @RequestBody MessageRequestDto messageRequestDto)
             throws JsonProcessingException {

@@ -21,6 +21,7 @@ public class MessageRequestDto {
     @Email(message = "Email адрес должен быть в формате example@gmail.com")
     private String email;
 
+    @Schema(description = "Содержимое сообщения", example = "from postman")
     @NotBlank(message = "Сообщение не может быть пустым")
     @Size(max = 500, message = "Сообщение не может быть больше 500 символов")
     private String messageContent;
