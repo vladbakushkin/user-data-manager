@@ -7,12 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.bakushkin.dto.message.MessageRequestDto;
 import ru.bakushkin.dto.message.MessageResponseDto;
 import ru.bakushkin.dto.user.UserShortResponseDto;
-import ru.bakushkin.userdataservice.service_activity.entity.ServiceActivityAction;
-import ru.bakushkin.userdataservice.service_activity.service.ServiceActivityService;
 import ru.bakushkin.userdataservice.message.entity.Message;
 import ru.bakushkin.userdataservice.message.mapper.MessageMapper;
-import ru.bakushkin.userdataservice.user.entity.User;
 import ru.bakushkin.userdataservice.message.repository.MessageRepository;
+import ru.bakushkin.userdataservice.service_activity.entity.ServiceActivityAction;
+import ru.bakushkin.userdataservice.service_activity.service.ServiceActivityService;
+import ru.bakushkin.userdataservice.user.entity.User;
 import ru.bakushkin.userdataservice.user.mapper.UserMapper;
 import ru.bakushkin.userdataservice.user.repository.UserRepository;
 import ru.bakushkin.userdataservice.user_activity.entity.UserActivityAction;
@@ -40,8 +40,6 @@ public class MessageServiceImpl implements MessageService {
     @Transactional
     public void saveMessage(MessageRequestDto messageRequestDto) {
         Message message = messageMapper.toMessage(messageRequestDto);
-//        Message message = new Message();
-//        message.setMessageContent(messageRequestDto.getMessageContent());
         User user = userRepository.findByEmail(messageRequestDto.getEmail());
         message.setUser(user);
 
