@@ -25,6 +25,15 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <swagger-ui.version>1.6.14</swagger-ui.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${swagger-ui.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

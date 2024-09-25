@@ -43,22 +43,24 @@ public class MessageService {
     @Value("${application.ms3.status}")
     private String appStatus3;
 
+    public void sendStatus(String appId, String appStatus) throws JsonProcessingException {
+        StatusRequestDto statusRequestDto = new StatusRequestDto(appId, appStatus, LocalDateTime.now());
+        rabbitTemplate.convertAndSend(QUEUE_STATUS, objectMapper.writeValueAsString(statusRequestDto));
+    }
+
     @Scheduled(fixedRate = 10000)
     public void sendStatusApp1() throws JsonProcessingException {
-        StatusRequestDto statusRequestDto = new StatusRequestDto(appId1, appStatus1, LocalDateTime.now());
-        rabbitTemplate.convertAndSend(QUEUE_STATUS, objectMapper.writeValueAsString(statusRequestDto));
+        sendStatus(appId1, appStatus1);
     }
 
     @Scheduled(fixedRate = 5000)
     public void sendStatusApp2() throws JsonProcessingException {
-        StatusRequestDto statusRequestDto = new StatusRequestDto(appId2, appStatus2, LocalDateTime.now());
-        rabbitTemplate.convertAndSend(QUEUE_STATUS, objectMapper.writeValueAsString(statusRequestDto));
+        sendStatus(appId2, appStatus2);
     }
 
     @Scheduled(fixedRate = 15000)
     public void sendStatusApp3() throws JsonProcessingException {
-        StatusRequestDto statusRequestDto = new StatusRequestDto(appId3, appStatus3, LocalDateTime.now());
-        rabbitTemplate.convertAndSend(QUEUE_STATUS, objectMapper.writeValueAsString(statusRequestDto));
+        sendStatus(appId3, appStatus3);
     }
 
     public void sendMessage(MessageRequestDto messageRequestDto) throws JsonProcessingException {

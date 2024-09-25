@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Сообщение о статусе микросервиса")
-public class StatusRequestDto {
+@Schema(description = "Краткая информация о сообщении пользователя")
+public class MessageShortResponseDto {
 
-    private String applicationId;
+    private Long id;
 
-    private String status;
+    private String messageContent;
 
-    private LocalDateTime sendTime;
+    private LocalDateTime receivedAt;
 }

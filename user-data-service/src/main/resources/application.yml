@@ -1,3 +1,31 @@
 spring:
   application:
     name: user-data-service
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    open-in-view: false
+  sql:
+    init:
+      mode: always
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/${POSTGRES_DB:user-data-manager}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:iamroot}
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 8080
+
+application:
+  microservice3:
+    id: 3

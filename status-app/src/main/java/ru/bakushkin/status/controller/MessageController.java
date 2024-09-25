@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.bakushkin.dto.message.MessageRequestDto;
 import ru.bakushkin.status.service.MessageService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("messages")
@@ -20,7 +22,8 @@ public class MessageController {
     private final MessageService messageService;
 
     @PostMapping
-    public ResponseEntity<String> sendMessage(@RequestBody MessageRequestDto messageRequestDto) throws JsonProcessingException {
+    public ResponseEntity<String> sendMessage(@Valid @RequestBody MessageRequestDto messageRequestDto)
+            throws JsonProcessingException {
         log.info("Sending message: {}", messageRequestDto);
         messageService.sendMessage(messageRequestDto);
         return ResponseEntity.ok("Message sent: " + messageRequestDto);

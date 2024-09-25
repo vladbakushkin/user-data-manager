@@ -8,4 +8,4 @@ server:
 application:
   client:
     name: user-service
-    url: http://localhost:8080
+    url: ${SERVER_URL:http://localhost:8080}
