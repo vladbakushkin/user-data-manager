@@ -2,7 +2,11 @@ package ru.bakushkin.dto.constant;
 
 import java.time.format.DateTimeFormatter;
 
-public class Constants {
+public final class Constants {
+
+    private Constants() {
+
+    }
 
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

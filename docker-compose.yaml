@@ -1,0 +1,57 @@
+version: '3.1'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    labels:
+      NAME: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  udm-db:
+    image: postgres:14-alpine
+    container_name: udm-db-container
+    volumes:
+      - /var/lib/postgresql/data/
+    ports:
+      - "6542:5432"
+    environment:
+      - POSTGRES_DB=user-data-manager-db
+      - POSTGRES_USER=udm
+      - POSTGRES_PASSWORD=udm
+
+  user-data-service:
+    build: ./user-data-service
+    container_name: user-data-service-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - udm-db
+      - rabbitmq
+    restart: on-failure
+    environment:
+      - POSTGRES_HOST=udm-db
+      - POSTGRES_DB=user-data-manager-db
+      - POSTGRES_USER=udm
+      - POSTGRES_PASSWORD=udm
+
+  status-app:
+    build: ./status-app
+    container_name: status-app-container
+    ports:
+      - "9090:9090"
+    depends_on:
+      - rabbitmq
+    restart: on-failure
+
+  user-manager-app:
+    build: ./user-manager-app
+    container_name: user-manager-app-container
+    ports:
+      - "8081:8081"
+    depends_on:
+      - user-data-service
+    restart: on-failure
+    environment:
+      - SERVER_URL=http://user-data-service:8080
